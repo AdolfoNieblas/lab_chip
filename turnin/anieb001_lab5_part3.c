@@ -13,11 +13,6 @@
 #include "simAVRHeader.h"
 #endif
 
-//ifndef F_CPU
-//#define F_CPU 1000000UL   //defined now as 1MHz unsigned long
-//#endif
-#include <util/delay.h>   //add this to use the delay function
-
 enum SM_STATES{SM_Start, SM_INIT, SM_Trail, SM_Alternate, SM_OutToFill} state;
 
 //unsigned char tmpA = 0x00;      //Temporary variable to hold the value of A
@@ -158,8 +153,6 @@ int main(void) {
         // 2) Do calculations
 		// Go to Timer_Toggle function
 		Timer_Toggle();
-
-        _delay_ms(4000);     //delay 1/2 second.
 
 		// 3) Write output
 		//PORTB = tmpB;
