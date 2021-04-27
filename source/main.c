@@ -24,7 +24,6 @@ void Timer_Toggle() {
 	switch(state) {
 		case SM_Start:
 			state = SM_INIT;
-            //PORTC = 0x00; //set while transition to INIT
 			break;
 
 		case SM_INIT: 	  //wait for A0 to be pressed, else all lights off.
@@ -73,11 +72,11 @@ void Timer_Toggle() {
 
 	switch(state) {
 		case SM_Start:
-			PORTC = 0x00;
+			PORTB = 0x00;
 			break;
 
 		case SM_INIT: 
-			PORTC = 0x00;
+			PORTB = 0x00;
 			break;
 
 		case SM_Trail: 
@@ -86,7 +85,7 @@ void Timer_Toggle() {
                 counter = 0x00; //also resets the counter once we get to the last light
             }
             //if(counter < 0x03) {
-            PORTC = 0x09 << counter;
+            PORTB = 0x09 << counter;
             counter = counter + 1;
 			break;
 
@@ -94,11 +93,11 @@ void Timer_Toggle() {
             //010101 -> 101010 (can shift 1 left, then right)
             //if(counter % 0x00) { //if counter is even( remainder 0) shift left
             if(counter == 0x00) { //if counter is even( remainder 0) shift left
-                PORTC = 0x15 << 1;
+                PORTB = 0x15 << 1;
                 counter = counter + 1; //counter will be odd next tick.
             }
             else {  //counter is odd (remainder 1), shift 1 right,
-                PORTC = PORTC >> 1;
+                PORTB = PORTB >> 1;
                 counter = 0x00; //resetting counter back to 0.
             }
 			break;
@@ -106,33 +105,33 @@ void Timer_Toggle() {
 		case SM_OutToFill: 
             // bb10 0001 -> bb11 0011 -> bb11 1111 -> bb01 1110 -> bb00 1100 ->bb00 0000
             if(counter == 0x00) {
-                PORTC = 0x21;
+                PORTB = 0x21;
                 counter = counter + 1;
             }
             else if(counter == 0x01) {
-                PORTC = 0x33;
+                PORTB = 0x33;
                 counter = counter + 1;
             }
             else if(counter == 0x02) {
-                PORTC = 0x3F;
+                PORTB = 0x3F;
                 counter = counter + 1;
             }
             else if(counter == 0x03) {
-                PORTC = 0x1E;
+                PORTB = 0x1E;
                 counter = counter + 1;
             }
             else if(counter == 0x04) {
-                PORTC = 0x0C;
+                PORTB = 0x0C;
                 counter = counter + 1;
             }
             else {
-                PORTC = 0x00; //will go back to the beginning.
+                PORTB = 0x00; //will go back to the beginning.
                 counter = 0x00;
             }
 			break;
 
 		default:
-			PORTC = 0x00;
+			PORTB = 0x00;
 			break;
 	}//end-switch
 
@@ -141,7 +140,7 @@ void Timer_Toggle() {
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
-	DDRC = 0xFF; PORTC = 0x00; // Output for PORTC is initially 7.
+	DDRB = 0xFF; PORTB = 0x00; // Output for PORTB.
 
 	//tmpA = 0x00; // Temporary variable to hold the value of A
 
