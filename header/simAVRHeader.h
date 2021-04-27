@@ -1,7 +1,8 @@
 /* Debug information for SimAVR */
 #include <stdio.h>
+#include <util/delay.h>
 #ifndef F_CPU
-#define F_CPU 8000000
+#define F_CPU 8000000   //8MHz
 #endif
 
 #include <avr/sleep.h>

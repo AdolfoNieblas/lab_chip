@@ -9,6 +9,7 @@
  * 	or example code, is my own original work.
  */
 #include <avr/io.h>
+#include <util/delay.h> //to be able to use delay function. Pytests worked, but need to delay to see the changes in the LEDs.
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
@@ -153,6 +154,8 @@ int main(void) {
         // 2) Do calculations
 		// Go to Timer_Toggle function
 		Timer_Toggle();
+
+        _delay_ms(200); //delaying for 200ms.
 
 		// 3) Write output
 		//PORTB = tmpB;

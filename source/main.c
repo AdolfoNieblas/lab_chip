@@ -9,14 +9,10 @@
  * 	or example code, is my own original work.
  */
 #include <avr/io.h>
+#include <util/delay.h> //to be able to use delay function. Pytests worked, but need to delay to see the changes in the LEDs.
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
-
-//ifndef F_CPU
-//#define F_CPU 1000000UL   //defined now as 1MHz unsigned long
-//#endif
-#include <util/delay.h>   //add this to use the delay function
 
 enum SM_STATES{SM_Start, SM_INIT, SM_Trail, SM_Alternate, SM_OutToFill} state;
 
@@ -159,7 +155,7 @@ int main(void) {
 		// Go to Timer_Toggle function
 		Timer_Toggle();
 
-        _delay_ms(4000);     //delay 1/2 second.
+        _delay_ms(200); //delaying for 200ms.
 
 		// 3) Write output
 		//PORTB = tmpB;
